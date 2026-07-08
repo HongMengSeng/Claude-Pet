@@ -1,0 +1,30 @@
+{
+  "skills": {
+    "autoLoad": [
+      "claude-pet:develop"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "command": "node \"${CLAUDE_PET_HOOK}\"",
+        "env": {
+          "CLAUDE_HOOK_TYPE": "file_changed"
+        }
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npm start)",
+      "Bash(npm install *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(mkdir *)",
+      "Bash(cd E:/web/claude-pet *)",
+      "PowerShell(Get-ChildItem E:\\web\\claude-pet *)"
+    ]
+  }
+}
