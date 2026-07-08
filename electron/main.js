@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const http = require('http');
 
@@ -7,9 +7,14 @@ let petServer;
 const PET_PORT = 18923;
 
 function createWindow() {
+  // Center window on primary display
+  const { width: sw, height: sh } = screen.getPrimaryDisplay().workAreaSize;
+
   mainWindow = new BrowserWindow({
     width: 400,
     height: 500,
+    x: sw - 420,         // Right side of screen
+    y: Math.floor(sh / 2 - 250),  // Vertically centered
     frame: false,
     transparent: true,
     alwaysOnTop: true,
@@ -24,9 +29,6 @@ function createWindow() {
 
   mainWindow.loadFile(path.join(__dirname, '..', 'src', 'index.html'));
 
-  // DEBUG: Open DevTools to see renderer errors
-  mainWindow.webContents.openDevTools({ mode: 'detach' });
-
   // Log renderer console to terminal
   mainWindow.webContents.on('console-message', (event, level, message) => {
     console.log(`[Renderer] ${message}`);
@@ -38,13 +40,9 @@ function createWindow() {
   } else if (process.platform === 'linux') {
     mainWindow.setVisibleOnAllWorkspaces(true);
   }
-  // Windows: alwaysOnTop: true is sufficient
 
   // Click-through by default
   mainWindow.setIgnoreMouseEvents(true, { forward: true });
-
-  // Prevent window from being captured in screenshots (optional)
-  mainWindow.setContentProtection(true);
 }
 
 function startPetServer() {
@@ -119,9 +117,7 @@ app.whenReady().then(() => {
       if (fs.existsSync(settingsPath)) {
         return JSON.parse(fs.readFileSync(settingsPath, 'utf-8'));
       }
-    } catch (e) {
-      // Return empty on error
-    }
+    } catch (e) {}
     return {};
   });
 

@@ -208,9 +208,16 @@ function drawEyes(cx, cy, s, expression) {
 
 // ─── Main draw function ───
 
+let drawCount = 0;
 function drawRobot(data) {
   ctx.clearRect(0, 0, W, H);
   const { cx, cy, scale: s } = getLayout();
+
+  // Diagnostic: log first few frames
+  if (drawCount < 3) {
+    console.log(`[drawRobot] frame=${drawCount} W=${W} H=${H} cx=${cx.toFixed(0)} cy=${cy.toFixed(0)} s=${s.toFixed(3)} expr=${data.expression}`);
+    drawCount++;
+  }
 
   // Apply sway offset
   const sx = cx + (data.sway || 0);
