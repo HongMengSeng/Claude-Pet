@@ -13,7 +13,8 @@ let currentAnimData = {
   fishX: 0,
   holdingFish: false,
   sway: 0,
-  jumpOffset: 0
+  jumpOffset: 0,
+  showDesk: false
 };
 
 // ─── Helper: easing ───
@@ -100,6 +101,7 @@ const ANIM_STATES = {
       data.bubbles = [];
       data.sign = null;
       data.holdingFish = false;
+      data.showDesk = true;
     },
     update(data, frame) {
       const speed = 0.12;
@@ -120,6 +122,7 @@ const ANIM_STATES = {
       data.particles = [];
       data.sign = null;
       data.holdingFish = false;
+      data.showDesk = false;
     },
     update(data, frame) {
       data.expression = 'sleeping';
@@ -150,6 +153,7 @@ const ANIM_STATES = {
       data.particles = [];
       data.sign = null;
       data.fishX = 0;
+      data.showDesk = false;
     },
     update(data, frame) {
       data.expression = 'happy';
@@ -178,6 +182,7 @@ const ANIM_STATES = {
       data.sign = null;
       data.holdingFish = false;
       data.holdingCoffee = true;
+      data.showDesk = false;
     },
     update(data, frame) {
       data.expression = 'happy';
@@ -204,6 +209,7 @@ const ANIM_STATES = {
       data.particles = [];
       data.sign = null;
       data.holdingFish = false;
+      data.showDesk = false;
     },
     update(data, frame) {
       // Rotate arms in a diagnostic pattern
@@ -232,6 +238,7 @@ const ANIM_STATES = {
       data.bubbles = [];
       data.particles = [];
       data.holdingFish = false;
+      data.showDesk = false;
     },
     update(data, frame) {
       data.expression = 'worried';
@@ -252,6 +259,7 @@ const ANIM_STATES = {
       data.particles = [];
       data.holdingFish = false;
       data.celebrationParticles = [];
+      data.showDesk = false;
     },
     update(data, frame) {
       data.expression = 'happy';
