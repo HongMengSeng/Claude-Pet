@@ -1,0 +1,26 @@
+{
+  "name": "claude-pet",
+  "version": "1.0.0",
+  "description": "Claude Desktop Pet — a robot companion for your desktop",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "build:all": "electron-builder --win --mac --linux"
+  },
+  "build": {
+    "appId": "com.claude.pet",
+    "productName": "Claude Pet",
+    "directories": { "output": "dist" },
+    "files": ["electron/**/*", "src/**/*", "package.json"],
+    "win": { "target": "nsis", "icon": "src/assets/icon.ico" },
+    "mac": { "target": "dmg", "icon": "src/assets/icon.icns" },
+    "linux": { "target": "AppImage", "icon": "src/assets/icon.png" }
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^25.0.0"
+  }
+}
