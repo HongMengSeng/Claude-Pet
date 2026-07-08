@@ -6,6 +6,7 @@ const DEFAULT_SETTINGS = {
   autoLaunch: true,
   idleIntervalMin: 30000,
   idleIntervalMax: 120000,
+  clickThrough: false,
   accessories: {},
   windowX: null,
   windowY: null
@@ -69,6 +70,15 @@ function createSettingsPanel() {
           </div>
 
           <div class="setting-row">
+            <span>👆 Click-through mode</span>
+            <label class="toggle">
+              <input type="checkbox" id="clickThrough" ${settings.clickThrough ? 'checked' : ''}
+                onchange="toggleClickThrough(this.checked)">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
             <span>⏱ Idle interval</span>
             <select id="idleInterval" onchange="updateIdleInterval(this.value)">
               <option value="15000" ${settings.idleIntervalMin === 15000 ? 'selected' : ''}>15 seconds</option>
@@ -111,13 +121,29 @@ function createSettingsPanel() {
   settingsPanel.classList.remove('hidden');
 }
 
+function toggleClickThrough(enabled) {
+  settings.clickThrough = enabled;
+  saveSettings({ clickThrough: enabled });
+  // Apply immediately
+  if (window.petAPI) {
+    // When settings panel is open, always disable click-through so UI is usable
+    if (!settingsPanel.classList.contains('hidden')) {
+      window.petAPI.setIgnoreMouse(false);
+    } else {
+      window.petAPI.setIgnoreMouse(enabled);
+    }
+  }
+}
+
 function toggleSettings() {
   if (settingsPanel.classList.contains('hidden')) {
     createSettingsPanel();
+    // Always enable mouse when settings is open
     if (window.petAPI) window.petAPI.setIgnoreMouse(false);
   } else {
     settingsPanel.classList.add('hidden');
-    if (window.petAPI) window.petAPI.setIgnoreMouse(true);
+    // Restore click-through setting
+    if (window.petAPI) window.petAPI.setIgnoreMouse(settings.clickThrough);
   }
 }
 

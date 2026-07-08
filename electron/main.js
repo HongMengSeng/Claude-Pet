@@ -44,8 +44,8 @@ function createWindow() {
     mainWindow.setVisibleOnAllWorkspaces(true);
   }
 
-  // Click-through by default
-  mainWindow.setIgnoreMouseEvents(true, { forward: true });
+  // Default: receive mouse events so user can drag and right-click
+  // Click-through can be toggled in settings (saved to localStorage)
 }
 
 function startPetServer() {

@@ -91,6 +91,11 @@
   // Load settings from localStorage
   loadSettings();
 
+  // Apply click-through setting on startup
+  if (window.petAPI) {
+    window.petAPI.setIgnoreMouse(settings.clickThrough || false);
+  }
+
   // Start in idle mode
   petState.setState('idle');
 
