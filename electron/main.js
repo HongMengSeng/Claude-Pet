@@ -24,6 +24,14 @@ function createWindow() {
 
   mainWindow.loadFile(path.join(__dirname, '..', 'src', 'index.html'));
 
+  // DEBUG: Open DevTools to see renderer errors
+  mainWindow.webContents.openDevTools({ mode: 'detach' });
+
+  // Log renderer console to terminal
+  mainWindow.webContents.on('console-message', (event, level, message) => {
+    console.log(`[Renderer] ${message}`);
+  });
+
   // Platform-specific window setup
   if (process.platform === 'darwin') {
     mainWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });

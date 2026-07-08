@@ -98,4 +98,7 @@
   console.log(`   State: ${petState.current}`);
   console.log('   Right-click to open settings');
   console.log('   HTTP server on port 18923');
+
+  // Start the animation loop (all modules are now loaded)
+  animationLoop();
 })();

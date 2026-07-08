@@ -26,6 +26,8 @@ class PetStateMachine {
   }
 
   transition(newState) {
+    // Same state is a no-op
+    if (this.current === newState) return true;
     const allowed = STATE_TRANSITIONS[this.current];
     if (!allowed || !allowed.includes(newState)) {
       console.warn(`[Claude Pet] Invalid transition: ${this.current} -> ${newState}`);

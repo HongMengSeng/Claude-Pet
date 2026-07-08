@@ -363,6 +363,4 @@ function drawParticles(data) {
   }
 }
 
-// ─── Start the loop ───
-
-animationLoop();
+// ─── Loop started in app.js after all modules load ───
