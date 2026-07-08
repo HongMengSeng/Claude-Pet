@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "StartSession": [
+      {
+        "command": "node /path/to/claude-pet/hook/claude-code-hook.js",
+        "env": { "CLAUDE_HOOK_TYPE": "session_start" }
+      }
+    ],
+    "StopSession": [
+      {
+        "command": "node /path/to/claude-pet/hook/claude-code-hook.js",
+        "env": { "CLAUDE_HOOK_TYPE": "session_end" }
+      }
+    ]
+  }
+}
