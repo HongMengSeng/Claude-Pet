@@ -20,7 +20,7 @@
     "linux": { "target": "AppImage", "icon": "src/assets/icon.png" }
   },
   "devDependencies": {
-    "electron": "^32.0.0",
+    "electron": "40.8.5",
     "electron-builder": "^25.0.0"
   }
 }
