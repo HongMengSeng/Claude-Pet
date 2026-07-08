@@ -191,7 +191,14 @@ function removeAccessorySlot(slot) {
 
 // ─── Context menu (right-click) ───
 
+// Right-click → open settings
 canvas.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  toggleSettings();
+});
+
+// Double-click → also open settings (easier for some users)
+canvas.addEventListener('dblclick', (e) => {
   e.preventDefault();
   toggleSettings();
 });
